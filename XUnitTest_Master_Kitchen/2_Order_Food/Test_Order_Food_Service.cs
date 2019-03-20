@@ -43,27 +43,14 @@ namespace XUnitTest_Master_Kitchen._2_Order_Food
         }
 
 
-        public class Bill_Order
-        {
-
-            [JsonProperty("orderid")]  
-            public string OrderID { get; set; }
-
-            [JsonProperty("ordertype")]
-            public OrderType TypeOfOrder { get; set; }
-
-            [JsonProperty("foodlist")]
-            public List<Order_Food_Items> foodList { get; set; }
-
-           
-        }
+       
 
         [Fact]
-        public async Task Send_Order_To_Station()
+        public async Task Send_Order_Recived_OrderID_1234567()
         {
 
 
-            var payload = new Order_Food
+       var payload = new Order_Food
             {
 
                 TypeOfOrder = OrderType.Eat_in,   // ประเภท การสั่ง   Eat in = 0 
@@ -93,7 +80,7 @@ namespace XUnitTest_Master_Kitchen._2_Order_Food
             using (var httpClient = new HttpClient())
             {
                 string token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcmVlIiwiZXhwIjoxNTgzNTU4MzI1fQ.fnfHszGmXXOwAyLYx5BvAYzB_KdPJdQB6KOyWDcxuMM";
-                string uri = "http://localhost:9090/RestfulJava/api/MasterKitchen/SendOrderToStation";
+                string uri = "http://localhost:9090/RestfulJava/api/MasterKitchen/SendOrder";
                 httpClient.BaseAddress = new Uri(uri);
                 httpClient.DefaultRequestHeaders.Authorization
                          = new AuthenticationHeaderValue("Bearer", token);
@@ -109,14 +96,13 @@ namespace XUnitTest_Master_Kitchen._2_Order_Food
                     responseStr = await response.Content.ReadAsStringAsync();
                 }
 
-                //  var actual = JsonConvert.DeserializeObject<List<MenuItem>>(responseStr);
 
 
                 // Act
 
                 JToken expected = JToken.Parse(@"{ ""orderId"": ""1234567""}");
-                
-                JToken actual = JToken.Parse(@"{ ""orderId"": ""1234567"" }");
+
+                JToken actual = JToken.Parse(responseStr);
 
 
                 // Assert
