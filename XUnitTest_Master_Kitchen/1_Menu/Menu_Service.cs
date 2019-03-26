@@ -15,25 +15,21 @@ namespace XUnitTest_Master_Kitchen._1_Menu
     {
         string responseStr = "";
 
-       
-            public class MenuItem
-            {
-            // [JsonProperty("menuid")]
-                public string menuID { get; set; }
-                public string menunameTH { get; set; }
-                public string menunameEN { get; set; }
-                public string category { get; set; }
-                public float sellPrice { get; set; }
 
-            }
+        public class MenuItem
+        {   // [JsonProperty("menuid")]
+            public string menuID { get; set; }
+            public string menunameTH { get; set; }
+            public string menunameEN { get; set; }
+            public string category { get; set; }
+            public float sellPrice { get; set; }
+        }
 
 
         public class MenuCategory
         {
-           
             public string MenuCategoryID { get; set; }
             public string MenuCateGoryName { get; set; }
-         
         }
 
 
@@ -147,8 +143,8 @@ namespace XUnitTest_Master_Kitchen._1_Menu
  
 
             string postJsonData = @"{  
-                                   'MenuCategoryID'     : 'C1007',
-                              }";
+                                        'MenuCategoryID'  : 'C1007',
+                                    }";
 
             using (var httpClient = new HttpClient())
             {
